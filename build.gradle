@@ -1,39 +1,20 @@
-if(rootProject.ext.moduleSetting.isLoginRunAlone.toBoolean()){
-    apply plugin: 'com.android.application'
-}else{
-    apply plugin: 'com.android.library'
-}
+apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion  rootProject.ext.android.compileSdkVersion.toInteger()
-
+    compileSdkVersion rootProject.ext.android.compileSdkVersion.toInteger()
     defaultConfig {
-        if(rootProject.ext.moduleSetting.isLoginRunAlone.toBoolean()){
-            applicationId "com.dragonforest.app.templatemodule"
-        }
+        applicationId "com.dragonforest.app.templatemodule"
         minSdkVersion rootProject.ext.android.minSdkVersion.toInteger()
         targetSdkVersion rootProject.ext.android.targetSdkVersion.toInteger()
         versionCode rootProject.ext.android.versionCode.toInteger()
         versionName rootProject.ext.android.versionName
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
     }
 
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
-    }
-
-    // Manifest配置
-    sourceSets {
-        main {
-            if (rootProject.ext.moduleSetting.isLoginRunAlone.toBoolean()) {
-                manifest.srcFile 'src/main/AndroidManifest.xml'
-            } else {
-                manifest.srcFile 'src/main/libmanifest/AndroidManifest.xml'
-            }
         }
     }
 }
